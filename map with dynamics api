@@ -1,0 +1,24 @@
+
+
+
+ data_by_map(){
+    // of(1,4,5,7,9).pipe(map((result)=>result * 2 )).subscribe(console.log)
+    this.http_.get('https://jsonplaceholder.typicode.com/users').subscribe((res)=>{
+      console.log(res)
+    })
+
+   // by using Subscribe methods
+    this.http_.get('https://jsonplaceholder.typicode.com/users').pipe(
+      map((res:any) =>
+      res.map((data:any) =>
+      {
+        return {
+          name: data.name,
+          website: data.website,
+          address:data.address.city             
+          // the address is the nested objects in the
+        };
+      })
+      )
+    ).subscribe(console.log)
+  }
